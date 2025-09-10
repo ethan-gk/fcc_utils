@@ -109,9 +109,9 @@ def batch_process(source_folder=None, destination_folder=None, move_originals=Tr
     source = Path(source_folder) if source_folder else script_dir
     dest = Path(destination_folder) if destination_folder else source
 
-    all_files = list(source.glob("*"))
-    txt_files = [f for f in all_files if f.suffix.lower() == ".txt"]
-    other_files = [f for f in all_files if f.suffix.lower() != ".txt"]
+    all_items = list(source.iterdir())
+    txt_files = [f for f in all_items if f.is_file() and f.suffix.lower() == ".txt"]
+    other_files = [f for f in all_items if f.is_file() and f.suffix.lower() != ".txt"]
     
     processed = 0
     skipped = 0
